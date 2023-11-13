@@ -1,0 +1,6 @@
+# Project exclude paths
+/lkd_common/target/
+/lkd_service/lkd_gate_way/target/
+/lkd_service/lkd_user_service/target/
+/lkd_service/lkd_vms_service/target/
+/lkd_service/service_common/target/
