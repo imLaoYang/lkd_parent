@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
+/**
+ * 图形验证码
+ */
 @Component
 public class KaptcharConfig {
 

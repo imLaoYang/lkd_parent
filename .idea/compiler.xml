@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -26,7 +27,9 @@
       <module name="lkd_gateway_microapp" options="-parameters" />
       <module name="lkd_microapp" options="-parameters" />
       <module name="lkd_order_service" options="-parameters" />
+      <module name="lkd_parent" options="-parameters" />
       <module name="lkd_production_service" options="-parameters" />
+      <module name="lkd_service" options="-parameters" />
       <module name="lkd_status_service" options="-parameters" />
       <module name="lkd_user_service" options="-parameters" />
       <module name="lkd_vms_service" options="-parameters" />

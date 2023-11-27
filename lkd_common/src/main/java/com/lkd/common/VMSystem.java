@@ -117,5 +117,9 @@ public class VMSystem {
      */
     public static final Integer PAY_STATUS_REFUNDIED = 3;
 
+    /**
+     *  区域工单统计前缀
+     */
+    public static final String REGION_TASK_KEY_PREF = "region.task.";
 
 }

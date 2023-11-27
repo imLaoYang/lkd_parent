@@ -9,4 +9,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface StatusService {
     @GetMapping("/status/vmStatus/{innerCode}")
     Boolean getVMStatus(@PathVariable("innerCode") String innerCode);
+
 }

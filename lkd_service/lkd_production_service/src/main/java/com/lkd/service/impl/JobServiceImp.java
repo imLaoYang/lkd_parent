@@ -7,6 +7,9 @@ import com.lkd.entity.JobEntity;
 import com.lkd.service.JobService;
 import org.springframework.stereotype.Service;
 
+/**
+ * 自动补货任务
+ */
 @Service
 public class JobServiceImp extends ServiceImpl<JobDao,JobEntity> implements JobService{
     @Override

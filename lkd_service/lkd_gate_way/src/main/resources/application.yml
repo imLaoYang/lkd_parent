@@ -1,6 +1,9 @@
+server:
+  port: 9007
 spring:
   application:
     name: gateway-service
+
 #  cloud:
 #    gateway:
 #      discovery:
@@ -56,5 +59,3 @@ spring:
 #          - Path=/taskService/**
 #        filters:
 #          - StripPrefix= 1
-server:
-  port: 9007

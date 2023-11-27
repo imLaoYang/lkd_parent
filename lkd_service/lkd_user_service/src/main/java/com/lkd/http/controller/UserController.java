@@ -7,16 +7,11 @@ import com.lkd.feignService.VMService;
 import com.lkd.http.viewModel.LoginReq;
 import com.lkd.http.viewModel.LoginResp;
 import com.lkd.http.viewModel.UserReq;
-import com.lkd.redis.RedisUtils;
 import com.lkd.service.RoleService;
 import com.lkd.service.UserService;
-import com.lkd.viewmodel.Pager;
-import com.lkd.viewmodel.UserViewModel;
-import com.lkd.viewmodel.UserWork;
-import com.lkd.viewmodel.VendingMachineViewModel;
+import com.lkd.viewmodel.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,17 +29,16 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
-@RequiredArgsConstructor
+@RequiredArgsConstructor  // 自动生成构造方法
 @Slf4j
 public class UserController {
+
     private final UserService userService;
     private final RoleService roleService;
     private final VMService vmService;
     private final DefaultKaptcha kaptcha;
     private final TaskService taskService;
-
-    @Autowired
-    private RedisTemplate<String,String> redisTemplate;
+    private final RedisTemplate<String,String> redisTemplate;
 
     /**
      * 根据id查询
@@ -144,8 +138,8 @@ public class UserController {
      * @param mobile
      */
     @GetMapping("/code/{mobile}")
-    public void generateCode(@PathVariable String mobile){
-        userService.sendCode(mobile);
+    public String generateCode(@PathVariable String mobile){
+        return userService.sendCode(mobile);
     }
 
     /**

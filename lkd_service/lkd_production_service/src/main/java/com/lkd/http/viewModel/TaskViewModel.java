@@ -5,11 +5,15 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * taskName,expect过时
+ */
 @Data
 public class TaskViewModel implements Serializable{
     /**
      * 工单名称
      */
+    @Deprecated
     private String taskName;
     /**
      * 工单类型
@@ -40,6 +44,7 @@ public class TaskViewModel implements Serializable{
     /**
      * 期望完成时间
      */
+    @Deprecated
     private String expect;
     /**
      * 工单详情(只有补货工单才涉及)

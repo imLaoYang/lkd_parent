@@ -11,7 +11,8 @@ public class TaskCompleteContract extends BaseContract{
         this.setMsgType("taskCompleted");
     }
 
-    private int taskType;
+    // 工单类型
+    private int productType;
     /**
      * 纬度
      */

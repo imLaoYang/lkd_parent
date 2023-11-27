@@ -1,9 +1,13 @@
 package com.lkd.http.controller;
+
 import com.lkd.http.viewModel.VmStatusVM;
 import com.lkd.service.VmStatusInfoService;
 import com.lkd.viewmodel.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
@@ -12,6 +16,11 @@ public class VmStatusInfoController {
 
     @Autowired
     private VmStatusInfoService vmStatusInfoService;
+
+    @GetMapping("test/feign")
+    public String fe(){
+        return "51312";
+    }
 
     /**
      * 获取所有设备状态

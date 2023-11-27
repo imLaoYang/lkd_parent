@@ -10,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDateTime;
 import java.util.concurrent.*;
 
+/**
+ * 分布式锁
+ */
 @Slf4j
 public class DistributedLock{
     private ConsulClient consulClient;

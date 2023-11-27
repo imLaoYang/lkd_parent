@@ -11,4 +11,7 @@ public interface OrderService {
 
     @GetMapping("/order/businessTop10Skus/{businessId}")
     List<Long> getBusinessTop10Skus(@PathVariable Integer businessId);
+
+
+
 }

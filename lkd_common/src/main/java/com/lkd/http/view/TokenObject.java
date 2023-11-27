@@ -14,6 +14,8 @@ public class TokenObject{
 
     private Integer userId;
 
+    private String userName;
+
     /**
      * 登录类型 0：后台；1：运营运维端；2：合作商后台
      */

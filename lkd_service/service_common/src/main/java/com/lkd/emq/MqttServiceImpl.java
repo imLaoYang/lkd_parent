@@ -27,6 +27,7 @@ public class MqttServiceImpl implements MqttService{
         String msgContent = new String(message.getPayload());
         log.info("接收到消息:"+msgContent);
         try {
+            // (分发业务逻辑)调用具体的业务逻辑实现类,处理收到的消息
             String msgType = JsonUtil.getValueByNodeName("msgType",msgContent);
             if(Strings.isNullOrEmpty(msgType)) return;
             MsgHandler msgHandler = msgHandlerContext.getMsgHandler(msgType);

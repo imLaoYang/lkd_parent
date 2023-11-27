@@ -10,12 +10,16 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * 售货机状态处理
+ */
 @Component
 @ProcessType(value = "vmStatus")
 @Slf4j
 public class VMStatusHandler implements MsgHandler{
     @Autowired
     private VmStatusInfoService statusInfoService;
+
     @Override
     public void process(String jsonMsg) throws IOException {
         VmStatusContract vmStatusContract = JsonUtil.getByJson(jsonMsg,VmStatusContract.class);

@@ -7,14 +7,12 @@ import com.google.common.base.Strings;
 import com.lkd.common.VMSystem;
 import com.lkd.dao.UserDao;
 import com.lkd.entity.UserEntity;
-import com.lkd.exception.LogicException;
 import com.lkd.http.view.TokenObject;
 import com.lkd.http.viewModel.LoginReq;
 import com.lkd.http.viewModel.LoginResp;
-import com.lkd.redis.RedisUtils;
 import com.lkd.service.PartnerService;
 import com.lkd.service.UserService;
-import com.lkd.sms.SmsSender;
+
 import com.lkd.utils.BCrypt;
 import com.lkd.utils.JWTUtil;
 import com.lkd.viewmodel.Pager;
@@ -38,8 +36,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao,UserEntity> implements 
     @Autowired
     private PartnerService partnerService;
 
-    @Autowired
-    private SmsSender smsSender;
+
     @Override
     public Integer getOperatorCount() {
         LambdaQueryWrapper<UserEntity> wrapper = new LambdaQueryWrapper<>();
@@ -80,6 +77,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao,UserEntity> implements 
 
     @Override
     public LoginResp login(LoginReq req) throws IOException {
+        // 判断登录类型
         if(req.getLoginType() == VMSystem.LOGIN_ADMIN){
             return this.adminLogin(req);
         }else if(req.getLoginType() == VMSystem.LOGIN_EMP){
@@ -97,16 +95,17 @@ public class UserServiceImpl extends ServiceImpl<UserDao,UserEntity> implements 
 
 
     @Override
-    public void sendCode(String mobile){
+    public String sendCode(String mobile){
         //非空校验
-        if(Strings.isNullOrEmpty(mobile)) return;
+        if(Strings.isNullOrEmpty(mobile)) return null;
 
         //查询用户表中是否存在该手机号
         LambdaQueryWrapper<UserEntity> wrapper = new LambdaQueryWrapper<>();
         wrapper
                 .eq(UserEntity::getMobile,mobile);
-        if(this.count(wrapper)<=0) return;  //如果不存在，直接返回
-        if(redisTemplate.opsForValue().get(mobile) != null) return;  //避免5分钟内重复发送
+        if(this.count(wrapper)<=0) return null;  //如果不存在，直接返回
+        //避免5分钟内重复发送
+        // if(redisTemplate.opsForValue().get(mobile) != null) return null;
         //生成5位短信验证码
         StringBuilder sbCode = new StringBuilder();
         Stream
@@ -115,8 +114,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao,UserEntity> implements 
                 .forEach(x-> sbCode.append(x));
         //将验证码放入redis  ，5分钟过期
         redisTemplate.opsForValue().set(mobile,sbCode.toString(), Duration.ofMinutes(5));
+        return sbCode.toString();
         //发送短信
-        smsSender.sendMsg(mobile,sbCode.toString());
+        // smsSender.sendMsg(mobile,sbCode.toString());
     }
 
     @Override
@@ -161,7 +161,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao,UserEntity> implements 
 
     @Override
     public Integer getCountByRegion(Long regionId, Boolean isRepair) {
-        var qw = new LambdaQueryWrapper<UserEntity>();
+        LambdaQueryWrapper<UserEntity> qw = new LambdaQueryWrapper<UserEntity>();
         qw.eq(UserEntity::getRegionId,regionId);
         if(isRepair){
             qw.eq(UserEntity::getRoleId,3);

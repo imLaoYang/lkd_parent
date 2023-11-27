@@ -41,7 +41,7 @@ public interface UserService extends IService<UserEntity> {
      * 发送验证码
      * @param mobile
      */
-    void sendCode(String mobile);
+    String sendCode(String mobile);
 
     /**
      * 获取某区域下所有运营人员

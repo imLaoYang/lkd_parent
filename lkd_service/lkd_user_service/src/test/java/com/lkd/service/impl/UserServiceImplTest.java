@@ -25,6 +25,7 @@ public class UserServiceImplTest {
 
     @Test
     public void login() throws IOException {
+
         redisTemplate.opsForValue().set("13900000000","11111", Duration.ofMinutes(5));
         LoginReq loginReq = new LoginReq();
         loginReq.setLoginType(VMSystem.LOGIN_EMP);

@@ -13,8 +13,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Configuration
 @Component
 @Data
@@ -63,11 +61,11 @@ public class MqttConfig {
         MqttConnectOptions options = new MqttConnectOptions();
         options.setUserName(username);
         options.setPassword(password.toCharArray());
-        options.setCleanSession(true);
+        options.setCleanSession(true); // 重连后是否清除之前信息
         options.setAutomaticReconnect(true);
         options.setConnectionTimeout(connectionTimeout);
-        options.setKeepAliveInterval(keepAliveInterval);
-        options.setMqttVersion(MqttConnectOptions.MQTT_VERSION_3_1_1);
+        options.setKeepAliveInterval(keepAliveInterval); // 心跳
+        options.setMqttVersion(MqttConnectOptions.MQTT_VERSION_3_1_1); // mqtt版本
 
         return options;
     }

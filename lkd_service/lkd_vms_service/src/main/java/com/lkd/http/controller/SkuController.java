@@ -43,8 +43,8 @@ public class SkuController {
      */
     @GetMapping("/skuViewModel/{skuId}")
     public SkuViewModel getVmById(@PathVariable long skuId){
-        SkuViewModel vm = new SkuViewModel();
         SkuEntity skuEntity = this.findById(skuId);
+        SkuViewModel vm = new SkuViewModel();
         vm.setPrice(skuEntity.getPrice());
         vm.setSkuId(skuEntity.getSkuId());
         vm.setSkuName(skuEntity.getSkuName());
@@ -104,6 +104,7 @@ public class SkuController {
     public String uploadSkuImage(@RequestParam("fileName") MultipartFile file){
         return fileManager.uploadFile(file);
     }
+
 
     /**
      * 获取商品品类列表
